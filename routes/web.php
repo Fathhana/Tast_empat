@@ -11,10 +11,21 @@
 |
 */
 route::get('/', function(){
-	return redirect()->to('/crud');
+	return redirect()->to('/article');
 });
-// Route::resource('crud', 'CrudController');
-Route::get('/crud', 'CrudController@index');
-Route::post('/crud/store', 'CrudController@store');
-Route::post('/crud/update', 'CrudController@update');
-Route::post('/crud/destroy', 'CrudController@destroy');
+
+
+Route::post('/article/store', 'ArticleController@store');
+Route::post('/article/update', 'ArticleController@update');
+Route::post('/article/destroy', 'ArticleController@destroy');
+Route::resource('article','ArticleController');
+
+//Import Export Excel,ods,csv MaatWebsite
+Route::get('importExport', 'ImportExcel@importExport');
+Route::get('downloadExcel/{type}', 'ImportExcel@downloadExcel');
+Route::post('importExcel', 'ImportExcel@importExcel');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
